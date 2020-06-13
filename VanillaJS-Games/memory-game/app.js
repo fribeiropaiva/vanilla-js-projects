@@ -118,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function checkfIfGameIsOver() {
     if (cardsWon.length === (cardArray.length/2)) {
       resultContainer.textContent = "Congratulations! You got them all!";
+      gameGrid.classList.add('display-none');
       enableNewGame();
     }
   }
@@ -126,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     newGameBtn.disabled = false;
     newGameBtn.addEventListener('click', () => {
       resultContainer.textContent = "";
+      gameGrid.classList.remove('display-none');
       createBoard();
     });
   }
