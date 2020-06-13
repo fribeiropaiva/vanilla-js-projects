@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const gameGrid = document.querySelector('.game-grid');
   let newGameBtn = document.querySelector('.new-game-button');
+  let resultContainer = document.querySelector('#result');
+  let score = 0;
   let cardsChosen = [];
   let cardsChosenId = [];
   let cardsWon = [];
@@ -88,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const optionOneId = cardsChosenId[0];
     const optionTwoId = cardsChosenId[1];
 
+
     console.log(cardsChosen)
     console.log(cardsChosen[0] === cardsChosen[1])
 
@@ -97,6 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
       cards[optionOneId].removeEventListener('click', flipCard);
       cards[optionTwoId].removeEventListener('click', flipCard);
       cardsWon.push(cardsChosen);
+      score++;
+      resultContainer.textContent = score;
     } else {
       cards[optionOneId].setAttribute('src', 'images/homer-scream.jpg');
       cards[optionTwoId].setAttribute('src', 'images/homer-scream.jpg');
@@ -110,14 +115,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function checkfIfGameIsOver() {
     if (cardsWon.length === (cardArray.length/2)) {
-      document.querySelector('#result').textContent = "Congratulations! You got them all!";
+      resultContainer.textContent = "Congratulations! You got them all!";
       enableNewGame();
     }
   }
 
   function enableNewGame() {
     newGameBtn.disabled = false;
-    newGameBtn.addEventListener('click', createBoard);
+    newGameBtn.addEventListener('click', () => {
+      resultContainer.textContent = "";
+      createBoard();
+    });
   }
 
   createBoard();
