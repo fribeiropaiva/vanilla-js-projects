@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function checkfIfGameIsOver() {
     if (cardsWon.length === (cardArray.length/2)) {
+      cardsWon = [];
       resultContainer.textContent = "Congratulations! You got them all!";
       gameGrid.classList.add('display-none');
       enableNewGame();
