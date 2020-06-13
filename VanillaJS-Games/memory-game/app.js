@@ -51,6 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
     },
   ];
 
+  cardArray.sort(() => 0.5 - Math.random());
+
   const gameGrid = document.querySelector('.game-grid');
   let newGameBtn = document.querySelector('.new-game-button');
   let resultContainer = document.querySelector('#result');
