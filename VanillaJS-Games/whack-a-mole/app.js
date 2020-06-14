@@ -8,23 +8,29 @@ let currentTime = parseInt(timeLeft.textContent);
 let hitPosition = null;
 
 function randomSquare() {
-  squares.forEach(square => {
-    square.classList.remove('mole');
-  });
+  let lastPosition = hitPosition;
+  let moleSquare = document.querySelector('.mole');
   let nextSquare = squares[Math.floor(Math.random() * 9)];
-  nextSquare.classList.add('mole');
 
+  if (moleSquare) {
+    moleSquare.classList.remove('mole');
+    moleSquare.removeEventListener('mouseUp', addToScore);
+  }
+
+  nextSquare.classList.add('mole');
+  nextSquare.addEventListener('mouseup', addToScore, {once: true});
   hitPosition = nextSquare.id;
+  if (lastPosition === hitPosition) {
+    randomSquare();
+  }
 }
 
-squares.forEach(square => {
-  square.addEventListener('mouseup', () => {
-    if (square.id === hitPosition) {
-      result += 1;
-      score.textContent = result;
-    }
-  })
-})
+function addToScore() {
+  if (this.id === hitPosition) {
+    result += 1;
+    score.textContent = result;
+  }
+}
 
 function moveMole() {
   timerId = setInterval(randomSquare, 1000);
@@ -37,9 +43,13 @@ function countDown() {
   timeLeft.textContent = currentTime;
 
   if (currentTime === 0) {
-    clearInterval(timerId);
-    clearInterval(countdownId);
+    gameOver();
   }
+}
+
+function gameOver() {
+  clearInterval(timerId);
+  clearInterval(countdownId);
 }
 
 
