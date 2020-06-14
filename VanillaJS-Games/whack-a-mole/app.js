@@ -2,10 +2,11 @@ const squares =  document.querySelectorAll('.square');
 const mole = document.querySelectorAll('.mole');
 const timeLeft = document.querySelector('#time-left');
 let score = document.querySelector('#score');
-let timerId = null;
 let result = 0;
 let currentTime = parseInt(timeLeft.textContent);
 let hitPosition = null;
+let timerId = null;
+let countdownId
 
 function randomSquare() {
   let lastPosition = hitPosition;
@@ -52,5 +53,4 @@ function gameOver() {
   clearInterval(countdownId);
 }
 
-
-let countdownId = setInterval(countDown, 1000);
+countdownId = setInterval(countDown, 1000);
