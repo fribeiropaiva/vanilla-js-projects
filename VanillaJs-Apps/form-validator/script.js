@@ -37,6 +37,14 @@ function checkEmail(email) {
   }
 }
 
+function checkPasswordsMatch(password, confirmPassword) {
+  if (confirmPassword.value === password.value) {
+    showSuccess(confirmPassword);
+  } else {
+    showError(confirmPassword, "Passwords do not match");
+  }
+}
+
 function showError(input, message) {
   const formControl = input.parentElement;
   const errorContainer = formControl.querySelector('small');
@@ -56,4 +64,5 @@ form.addEventListener('submit', function(e) {
   checkLength(username, 3, 15);
   checkLength(password, 6, 25);
   checkEmail(email);
+  checkPasswordsMatch(password, confirmPassword);
 });
