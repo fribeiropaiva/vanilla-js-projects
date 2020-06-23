@@ -28,6 +28,15 @@ function checkLength(field, min, max) {
   }
 }
 
+function checkEmail(email) {
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  if (re.test(email.value.trim())) {
+    showSuccess(email);
+  } else {
+    showError(email, "Email is not valid.");
+  }
+}
+
 function showError(input, message) {
   const formControl = input.parentElement;
   const errorContainer = formControl.querySelector('small');
@@ -46,4 +55,5 @@ form.addEventListener('submit', function(e) {
   checkRequiredFields([username, email, password, confirmPassword]);
   checkLength(username, 3, 15);
   checkLength(password, 6, 25);
+  checkEmail(email);
 });
