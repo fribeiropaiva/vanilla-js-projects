@@ -18,8 +18,20 @@ function getFieldName(field) {
   return field.id.charAt(0).toUpperCase() + field.id.slice(1);
 }
 
+function checkLength(field, min, max) {
+  if (field.value.length < min && field.value.length > 0) {
+    showError(field, `The minimum number of characters is ${min}`);
+  } else if (field.value.length > max) {
+    showError(field, `The maximum number of characters is ${max}`);
+  } else {
+    showSuccess(field);
+  }
+}
+
 form.addEventListener('submit', function(e) {
   e.preventDefault();
 
   checkRequiredFields([username, email, password, confirmPassword]);
+  checkLength(username, 3, 15);
+  checkLength(password, 6, 25);
 });
