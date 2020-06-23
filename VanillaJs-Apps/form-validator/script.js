@@ -14,6 +14,10 @@ function checkRequiredFields(requiredFields) {
   })
 }
 
+function getFieldName(field) {
+  return field.id.charAt(0).toUpperCase() + field.id.slice(1);
+}
+
 form.addEventListener('submit', function(e) {
   e.preventDefault();
 
