@@ -28,6 +28,18 @@ function checkLength(field, min, max) {
   }
 }
 
+function showError(input, message) {
+  const formControl = input.parentElement;
+  const errorContainer = formControl.querySelector('small');
+  formControl.classList.add('error');
+  errorContainer.innerText = message;
+}
+
+function showSuccess(input) {
+  const formControl = input.parentElement;
+  formControl.classList.add('success');
+}
+
 form.addEventListener('submit', function(e) {
   e.preventDefault();
 
