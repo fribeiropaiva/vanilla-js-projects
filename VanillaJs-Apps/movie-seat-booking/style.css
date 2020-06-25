@@ -33,7 +33,7 @@ body {
   appearance: none;
 }
 
-.container {
+.seats-container {
   perspective: 1000px;
   margin-bottom: 20px;
 }
