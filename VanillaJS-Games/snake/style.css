@@ -1,1 +1,4 @@
-
+#canvas {
+  background-image: url('images/ground.png');
+  border: 32px solid darkgreen;
+}
