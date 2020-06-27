@@ -15,10 +15,7 @@ snake[0] = {
   y: 10 * box
 }
 
-food = {
-  x: Math.floor(Math.random() * 17 + 1) * box,
-  y: Math.floor(Math.random() * 17 + 1) * box
-}
+randomizeFoodPosition();
 
 function direction(event) {
   if ((event.key === 'ArrowLeft' && !(dir == "RIGHT"))) {
@@ -62,10 +59,8 @@ function draw() {
 
   if (snakeX == food.x && snakeY == food.y) {
     score++;
-    food = {
-      x: Math.floor(Math.random() * 17 + 1) * box,
-      y: Math.floor(Math.random() * 17 + 1) * box
-    }
+    randomizeFoodPosition();
+
   } else {
     const tail = snake.pop();
   }
@@ -86,13 +81,24 @@ function draw() {
   snake.unshift(newHead);
 }
 
-function collision(newHead, array) {
+function collision(object, array) {
   for (let i = 0; i < array.length; i++) {
-    if (newHead.x == array[i].x && newHead.y == array[i].y) {
+    if (object.x == array[i].x && object.y == array[i].y) {
       return true;
     }
   }
   return false;
+}
+
+function randomizeFoodPosition() {
+  food = {
+    x: Math.floor(Math.random() * 17 + 1) * box,
+    y: Math.floor(Math.random() * 17 + 1) * box
+  }
+
+  if (collision(food, snake)) {
+    randomizeFoodPosition();
+  }
 }
 
 gameLoop = setInterval(draw, 200);
